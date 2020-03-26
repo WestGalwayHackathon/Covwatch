@@ -1,0 +1,26 @@
+{
+  "name": "covwatch",
+  "version": "1.0.0",
+  "description": "covid-19 site",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WestGalwayHackathon/Covwatch.Web.git"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "WestGalwayHackathon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WestGalwayHackathon/Covwatch.Web/issues"
+  },
+  "homepage": "https://github.com/WestGalwayHackathon/Covwatch.Web#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
