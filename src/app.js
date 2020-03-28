@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const app = express();
+const search = require('./app/country/searchCountry')
 
 const port = 8080;
 //call to api
@@ -19,6 +20,9 @@ let country = {
 
 app.use(cors())
 
-app.get("/api/search", (req, res) => res.send(country));
+app.get("/api/search", (req, res) => {
+  var result = search.execute('Ireland')
+  res.send(result)
+});
 
 app.listen(port, () => console.log(`API running on http://localhost:${port}`));
