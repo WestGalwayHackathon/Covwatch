@@ -1,24 +1,25 @@
-const express = require("express");
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}const express = require("express");
 const cors = require('cors');
-const app = express();
+const bodyParser = require('body-parser')
+const appRouter = require('./routers/appRouter')
+const createDBConnection = require('./db/db')
 
-const port = 8080;
-//call to api
-let country = {
-  name: 'Ireland',
-  status: {
-    title: 'Lockdown',
-    startDate: Date.now()
-  },
-  statistics: {
-    confirmed: 1500,
-    deaths: 8,
-    recovered: 200
-  }
-}
 
-app.use(cors())
+console.log('Connecting to DB...');
+createDBConnection().then(() => {
+  console.log('Booting up API...');
+  const app = express();
+  app.use(bodyParser.json())
+  const port = process.env.PORT;
+  console.log('Setting CORs Policy...');
+  app.use(cors())
+  console.log('Configuring Routes')
+  app.use(appRouter);
+  
 
-app.get("/api/search", (req, res) => res.send(country));
+  app.listen(port, () => console.log(`API running on http://localhost:${port}`));
 
-app.listen(port, () => console.log(`API running on http://localhost:${port}`));
+})

@@ -4,6 +4,7 @@
   "description": "covid-19 site",
   "main": "app.js",
   "scripts": {
+    "dev": "node app.js",
     "test": "test"
   },
   "repository": {
@@ -20,7 +21,13 @@
   },
   "homepage": "https://github.com/WestGalwayHackathon/Covwatch.Web#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "source": "0.0.3",
+    "structure": "^2.0.0-alpha.4"
   }
 }
