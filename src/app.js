@@ -6,10 +6,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const appRouter = require('./routers/appRouter')
 const createDBConnection = require('./db/db')
-
+const Agenda = require('agenda')
+const agendaConfig = require('./scheduled-jobs/agendaConfig')
 
 console.log('Connecting to DB...');
-createDBConnection().then(() => {
+createDBConnection().then(async () => {
   console.log('Booting up API...');
   const app = express();
   app.use(bodyParser.json())
@@ -18,8 +19,8 @@ createDBConnection().then(() => {
   app.use(cors())
   console.log('Configuring Routes')
   app.use(appRouter);
+  await agendaConfig.configure();
   
-
   app.listen(port, () => console.log(`API running on http://localhost:${port}`));
 
 })

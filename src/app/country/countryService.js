@@ -1,12 +1,32 @@
 const country = require('../../models/country')
 
 const searchCountries = async (name) => {
- return await  country.findOne({name:name});
+  return await country.findOne({ name: name });
 }
 
-const updateDeaths = async (id,deaths) => {
-  return await country.findOneAndUpdate(id, {$set: {'statistics.deaths': deaths}});  
+const updateCountryStats = async (id, deaths, confirmed, recovered) => {
+
+  return await country.findOneAndUpdate({ _id: id }, 
+    { $set: 
+      { 
+        'statistics.deaths': deaths,
+        'statistics.recovered': recovered,
+        'statistics.confirmed': confirmed,
+        'statistics.updatedAt': Date.now() 
+      } 
+    }, 
+    function (err, doc) {
+      if (err) {
+        console.log('err-', err);
+      }
+      console.log(doc.name , ' has been updated');    
+    }
+  );
+}
+
+const getAllCountries = async () => {
+  return await country.find();
 }
 
 
-module.exports = { searchCountries, updateDeaths }
+module.exports = { searchCountries, updateCountryStats, getAllCountries }
