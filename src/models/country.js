@@ -8,7 +8,8 @@ const statusSchema = new mongoose.Schema({
 const statisticSchema = new mongoose.Schema({
     confirmed:{type:Number, required:true},
     deaths:{type:Number,required:true},
-    recovered:{type:Number,required:true}
+    recovered:{type:Number,required:true},
+    updatedAt: {type:Date, required: true}
 
 })
 
