@@ -6,11 +6,13 @@ const configure = async () => {
     const agenda = new Agenda({ db: { address: connectionString, collection: 'jobs' } })
 
     agenda.define('update country stats', async job => {
+        console.log('----- Started Updating Country Stats -----');
         await scheduleJobService.updateCountryStats();
+        console.log('----- Finished Updating Country Stats -----'); 
     })
 
     await agenda.start();
-    await agenda.every('1 minute', 'update country stats')
+    await agenda.every('1 hour', 'update country stats')
 }
 
 module.exports = { configure }
